@@ -23,20 +23,20 @@
 
             <!-- Start Button -->
 
-            <button class="start">Start Quiz ➣</button>
+            <button class="start" onclick="runQuestions()">Start Quiz ➣</button>
 
             <!-- Question Container -->
 
-            <div class="questionContainer" style="display: none;">
+            <div class="questionContainer">
                 
                 <div class="askQuestions"></div>
 
                 <!-- Choices -->
 
                 <div class="choices">
-                    <div class="eachChoice" id="A" onclick="checkAnswer('A')"></div>
-                    <div class="eachChoice" id="B" onclick="checkAnswer('B')"></div>
-                    <div class="eachChoice" id="C" onclick="checkAnswer('C')"></div>
+                    <button class="eachChoice" id="A" onclick=""></button>
+                    <button class="eachChoice" id="B" onclick=""></button>
+                    <button class="eachChoice" id="C" onclick=""></button>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
         
         <!-- Score and Initial Log -->
         <div id="finalScore">
-            <input id="scoreLog" style="display: none;">
+            <div id="scoreLog"></div>
         </div>
          
         <script src="./assets/script.js"></script>

@@ -1,6 +1,6 @@
 var timerDisplay = document.querySelector(".timer");
 
-var timeLeft = 60;
+var timeLeft = 15;
 
 var startButton = document.querySelector(".start");
 
@@ -58,23 +58,129 @@ function countDown(event) {
             clearInterval(timerInterval);
             timerDisplay.textContent = "Time's up!";
 
+            questionContainer.replaceWith(finalScore);
 
-            // set function to send when timer is done it brings up initial and score page
+            var scoreInput = document.createElement("input");
+
+            scoreInput.placeholder = "Please enter your initials."
+
+            document.getElementById("scoreLog").appendChild(scoreInput);
+
+            // figure out how to save results and add child element below score log element to store saved results.
         }
+
     }, 1000);
 }
 
+function multipleChoice() {
+
+    var correctChoice = currentQuestion.correct;
+
+    console.log(correctChoice)
+};
+
+// Set questions to display 
+
 function runQuestions() {
-    var q = quizQuestions[currentQuestion];
 
-    quizQuestions.innerHTML = "<p>" + q.quizQuestions + "</p>";
-    choiceA.innerHTML = q.choiceA;
-    choiceB.innerHTML = q.choiceB;
-    choiceC.innerHTML = q.choiceC;
+    scoreLog = 0
+    scoreLog.textContent = "Your Score : " + scoreLog;
 
-}
+
+    // Question 1
+
+    askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
+    choiceA.textContent = currentQuestion.choiceA;
+    choiceB.textContent = currentQuestion.choiceB;
+    choiceC.textContent = currentQuestion.choiceC;
+
+    var choiceOptions = document.querySelectorAll(".eachChoice")
+    // for loop over choice options, for each option add click event listener for each click event
+    choiceOptions.addEventListener("click", multipleChoice)  
+
+    // call function inside event listener to run check for correct answer
+
+        // console.log() value of choice
+
+
+        // Question 2
+
+        currentQuestion = quizQuestions[1];
+
+        askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
+        choiceA.textContent = currentQuestion.choiceA;
+        choiceB.textContent = currentQuestion.choiceB;
+        choiceC.textContent = currentQuestion.choiceC;
+
+
+    document.querySelector(".eachChoice").addEventListener = function () {
+
+            // Question 3
+
+        currentQuestion = quizQuestions[2];
+
+        askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
+        choiceA.textContent = currentQuestion.choiceA;
+        choiceB.textContent = currentQuestion.choiceB;
+        choiceC.textContent = currentQuestion.choiceC;
+
+        document.querySelector(".eachChoice").addEventListener = function () {
+            alert("Quiz Completed");
+
+        }
+
+    }};
+
+    // Start Button 
+
+   
+
+    // document.querySelector("#B").onclick = function() {
+    //     if(!currentQuestion.correct) {
+    //         alert("Incorrect!");
+    //         timeLeft = timeLeft - 10;
+    //         scoreLog = scoreLog + 0;
+    //     } else {
+            
+    //         scoreLog = scoreLog + 1;
+    //     }
+    // }
+
+    // document.querySelector("#C").onclick = function() {
+    //     if(!currentQuestion.correct) {
+    //         alert("Incorrect!");
+    //         timeLeft = timeLeft - 10;
+    //         scoreLog = scoreLog + 0;
+    //     } else {
+            
+    //         scoreLog = scoreLog + 1;
+    //     }
+    // }
+
+
+  
+
+    //     if(!currentQuestion.correct) {
+    //         alert("Incorrect!");
+    //         timeLeft = timeLeft - 10;
+    //         scoreLog = scoreLog + 0;
+    //     } else {
+           
+    //         scoreLog = scoreLog + 1;
+    //     }
+
+    
+
+    //     if(!currentQuestion.correct) {
+    //         alert("Incorrect!");
+    //         timeLeft = timeLeft - 10;
+    //         scoreLog = scoreLog + 0;
+    //     } else {
+            
+    //         scoreLog = scoreLog + 1;
+    //     }
 
 // Start button event
-startButton.addEventListener("click", countDown, runQuestions);
 
+startButton.addEventListener("click", countDown);
 
