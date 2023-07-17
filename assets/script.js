@@ -66,7 +66,7 @@ function countDown(event) {
 
             document.getElementById("scoreLog").appendChild(scoreInput);
 
-            // figure out how to save results and add child element below score log element to store saved results.
+            // figure out how to save results and add to score with correct answers
         }
 
     }, 1000);
@@ -94,6 +94,15 @@ function runQuestions() {
     choiceB.textContent = currentQuestion.choiceB;
     choiceC.textContent = currentQuestion.choiceC;
 
+    if(!currentQuestion.correct) {
+        alert("Incorrect!");
+        timeLeft = timeLeft - 10;
+        scoreLog = scoreLog + 0;
+    } else {
+        
+        scoreLog = scoreLog + 1;
+    }
+
     var choiceOptions = document.querySelectorAll(".eachChoice")
     // for loop over choice options, for each option add click event listener for each click event
     choiceOptions.addEventListener("click", multipleChoice)  
@@ -111,6 +120,8 @@ function runQuestions() {
         choiceA.textContent = currentQuestion.choiceA;
         choiceB.textContent = currentQuestion.choiceB;
         choiceC.textContent = currentQuestion.choiceC;
+
+        
 
 
     document.querySelector(".eachChoice").addEventListener = function () {
@@ -131,56 +142,6 @@ function runQuestions() {
 
     }};
 
-    // Start Button 
-
-   
-
-    // document.querySelector("#B").onclick = function() {
-    //     if(!currentQuestion.correct) {
-    //         alert("Incorrect!");
-    //         timeLeft = timeLeft - 10;
-    //         scoreLog = scoreLog + 0;
-    //     } else {
-            
-    //         scoreLog = scoreLog + 1;
-    //     }
-    // }
-
-    // document.querySelector("#C").onclick = function() {
-    //     if(!currentQuestion.correct) {
-    //         alert("Incorrect!");
-    //         timeLeft = timeLeft - 10;
-    //         scoreLog = scoreLog + 0;
-    //     } else {
-            
-    //         scoreLog = scoreLog + 1;
-    //     }
-    // }
-
-
-  
-
-    //     if(!currentQuestion.correct) {
-    //         alert("Incorrect!");
-    //         timeLeft = timeLeft - 10;
-    //         scoreLog = scoreLog + 0;
-    //     } else {
-           
-    //         scoreLog = scoreLog + 1;
-    //     }
-
-    
-
-    //     if(!currentQuestion.correct) {
-    //         alert("Incorrect!");
-    //         timeLeft = timeLeft - 10;
-    //         scoreLog = scoreLog + 0;
-    //     } else {
-            
-    //         scoreLog = scoreLog + 1;
-    //     }
-
 // Start button event
 
 startButton.addEventListener("click", countDown);
-
