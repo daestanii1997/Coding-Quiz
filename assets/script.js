@@ -53,8 +53,8 @@ var quizQuestions = [
 
 
 
-var currentQuestion = quizQuestions[qIndex];
-console.log(currentQuestion)
+// var currentQuestion = quizQuestions[qIndex];
+// console.log(currentQuestion)
 
 scoreLog = 0
 scoreLogEl.textContent = "Your Score : " + scoreLog;
@@ -89,14 +89,19 @@ function countDown(event) {
 
 function multipleChoice() {
 
+    var currentQuestion = quizQuestions[qIndex];
+// console.log(currentQuestion)
+
     // console.log(qIndex)
     askQuestions.textContent = quizQuestions[qIndex].question;
 
-    choices.innerHTML = ""
+    choices.innerHTML = "";
 
-    for (let i = 0; i < currentQuestion.choices.length; i++) {
+    for(let i = 0; i < currentQuestion.choices.length; i++) {
 
-       console.log(currentQuestion.choices);
+        console.log("this is i:" + i)
+
+       console.log(currentQuestion.choices[i]);
 
        var answerButton = document.createElement("button");
 
@@ -108,11 +113,12 @@ function multipleChoice() {
 
        choices.appendChild(answerButton);
         
-    }
+    };
+};
+
     // var correctChoice = currentQuestion.correct;
 
     // console.log(correctChoice)
-};
 
 // Set questions to display 
 multipleChoice();
@@ -130,60 +136,38 @@ function questionClick(event){
 
 choices.addEventListener("click",questionClick);
 
-function runQuestions() {
+// function runQuestions() {
 
-    // Question 1
+//     // Question 1
 
-    askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
+//     // askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
    
 
-    if(!currentQuestion.correct) {
-        alert("Incorrect!");
-        timeLeft = timeLeft - 10;
-        scoreLog = scoreLog + 0;
-    } else {
-        
-        scoreLog = scoreLog + 1;
-    }
+//     var choiceOptions = document.querySelectorAll(".eachChoice")
+//     // for loop over choice options, for each option add click event listener for each click event
+//     // choiceOptions.addEventListener("click", multipleChoice)  
 
-    var choiceOptions = document.querySelectorAll(".eachChoice")
-    // for loop over choice options, for each option add click event listener for each click event
-    choiceOptions.addEventListener("click", multipleChoice)  
+//     // call function inside event listener to run check for correct answer
 
-    // call function inside event listener to run check for correct answer
-
-        // console.log() value of choice
+//         // console.log() value of choice
 
 
-        // Question 2
+//         // Question 2
 
-        currentQuestion = quizQuestions[1];
+//         currentQuestion = quizQuestions[1];
 
-        askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
-        choiceA.textContent = currentQuestion.choiceA;
-        choiceB.textContent = currentQuestion.choiceB;
-        choiceC.textContent = currentQuestion.choiceC;
+//         // askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
+     
+//     // document.querySelector(".eachChoice").addEventListener = function () {
 
-        
+//             // Question 3
 
+//         currentQuestion = quizQuestions[2];
 
-    document.querySelector(".eachChoice").addEventListener = function () {
+//         // askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
 
-            // Question 3
-
-        currentQuestion = quizQuestions[2];
-
-        askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
-        choiceA.textContent = currentQuestion.choiceA;
-        choiceB.textContent = currentQuestion.choiceB;
-        choiceC.textContent = currentQuestion.choiceC;
-
-        document.querySelector(".eachChoice").addEventListener = function () {
-            alert("Quiz Completed");
-
-        }
-
-    }};
+//     // }};
+// };
 
 // Start button event
 
