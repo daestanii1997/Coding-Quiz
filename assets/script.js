@@ -1,6 +1,6 @@
 var timerDisplay = document.querySelector(".timer");
 
-var timeLeft = 15;
+var timeLeft = 10;
 
 var startButton = document.querySelector(".start");
 
@@ -51,13 +51,10 @@ var quizQuestions = [
     
 ]
 
+// ScoreLog 
 
-
-// var currentQuestion = quizQuestions[qIndex];
-// console.log(currentQuestion)
-
-scoreLog = 0
-scoreLogEl.textContent = "Your Score : " + scoreLog;
+var scoreLog = 0;
+// scoreLogEl.textContent = "Your Score : " + scoreLog;
 
 // Timer Function
 function countDown(event) {
@@ -81,27 +78,32 @@ function countDown(event) {
 
             document.getElementById("finalScore").appendChild(initialInput);
 
+            // Save Button
+
+            var saveBtn = document.createElement("button");
+
+            saveBtn.textContent = "Save Results";
+
+            document.getElementById("finalScore").appendChild(saveBtn);
+
+
             // figure out how to save results and add to score with correct answers
         }
 
     }, 1000);
 }
 
+// Function to display questions and choice buttons
+
 function multipleChoice() {
 
     var currentQuestion = quizQuestions[qIndex];
-// console.log(currentQuestion)
 
-    // console.log(qIndex)
     askQuestions.textContent = quizQuestions[qIndex].question;
 
     choices.innerHTML = "";
 
     for(let i = 0; i < currentQuestion.choices.length; i++) {
-
-        console.log("this is i:" + i)
-
-       console.log(currentQuestion.choices[i]);
 
        var answerButton = document.createElement("button");
 
@@ -114,13 +116,11 @@ function multipleChoice() {
        choices.appendChild(answerButton);
         
     };
+
 };
 
-    // var correctChoice = currentQuestion.correct;
-
-    // console.log(correctChoice)
-
 // Set questions to display 
+
 multipleChoice();
 
 function questionClick(event){
@@ -131,43 +131,21 @@ function questionClick(event){
     console.log(qIndex);
 
     multipleChoice();
+
+    scoreLogEl.textContent = "Your Score : " + scoreLog;
+
+    // if(quizQuestions[qIndex].correct === this.event){
+
+    //     console.log(quizQuestions[qIndex].correct);
+
+    //     console.log(this.event)
+
+    //     scoreLog++;
+    // }
     
 };
 
 choices.addEventListener("click",questionClick);
-
-// function runQuestions() {
-
-//     // Question 1
-
-//     // askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
-   
-
-//     var choiceOptions = document.querySelectorAll(".eachChoice")
-//     // for loop over choice options, for each option add click event listener for each click event
-//     // choiceOptions.addEventListener("click", multipleChoice)  
-
-//     // call function inside event listener to run check for correct answer
-
-//         // console.log() value of choice
-
-
-//         // Question 2
-
-//         currentQuestion = quizQuestions[1];
-
-//         // askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
-     
-//     // document.querySelector(".eachChoice").addEventListener = function () {
-
-//             // Question 3
-
-//         currentQuestion = quizQuestions[2];
-
-//         // askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
-
-//     // }};
-// };
 
 // Start button event
 
