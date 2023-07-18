@@ -18,34 +18,46 @@ var choiceB = document.querySelector("#B");
 
 var choiceC = document.querySelector("#C");
 
-var scoreLog = document.querySelector("#scoreLog");
+var scoreLogEl = document.querySelector("#scoreLog");
+
+var qIndex = 0;
 
 var quizQuestions = [
     {
         question : "What does DOM stand for?",
-        choiceA : "Document Object Model", 
-        choiceB : "Disrespect Our Mothers",
-        choiceC : "Dogs On March",
-        correct : "A"
+        choices : [
+            "Disrespect Our Mothers",
+            "Dogs On March",
+            "Document Object Model",
+        ],
+        correct : "Document Object Model"
     },{
         question : "Which of the following is a primitive type?",
-        choiceA : "Symbol",
-        choiceB : "Number",
-        choiceC : "Keydown",
-        correct : "B"
+        choices : [
+            "Symbol",
+            "Number",
+            "Keydown",
+        ],
+        correct : "Number"
     },{
         question : "How many times will you see Hello World in this course?",
-        choiceA : "Once",
-        choiceB : "Twice",
-        choiceC : "Endless amount of times",
-        correct : "C"
+        choices : [
+            "Once",
+            "Twice",
+            "Endless amount of times",
+        ],
+        correct : "Endless amount of times"
     }
     
 ]
 
-var lastQuestion = quizQuestions.length - 1;
-var currentQuestion = quizQuestions[0];
 
+
+var currentQuestion = quizQuestions[qIndex];
+console.log(currentQuestion)
+
+scoreLog = 0
+scoreLogEl.textContent = "Your Score : " + scoreLog;
 
 // Timer Function
 function countDown(event) {
@@ -56,15 +68,18 @@ function countDown(event) {
 
         if(timeLeft === 0) {
             clearInterval(timerInterval);
+
             timerDisplay.textContent = "Time's up!";
+
+            // Initial container
 
             questionContainer.replaceWith(finalScore);
 
-            var scoreInput = document.createElement("input");
+            var initialInput = document.createElement("input");
 
-            scoreInput.placeholder = "Please enter your initials."
+            initialInput.placeholder = "Please enter your initials."
 
-            document.getElementById("scoreLog").appendChild(scoreInput);
+            document.getElementById("finalScore").appendChild(initialInput);
 
             // figure out how to save results and add to score with correct answers
         }
@@ -74,25 +89,53 @@ function countDown(event) {
 
 function multipleChoice() {
 
-    var correctChoice = currentQuestion.correct;
+    // console.log(qIndex)
+    askQuestions.textContent = quizQuestions[qIndex].question;
 
-    console.log(correctChoice)
+    choices.innerHTML = ""
+
+    for (let i = 0; i < currentQuestion.choices.length; i++) {
+
+       console.log(currentQuestion.choices);
+
+       var answerButton = document.createElement("button");
+
+       answerButton.textContent = currentQuestion.choices[i];
+
+       answerButton.setAttribute("class","answer-btn");
+
+       answerButton.setAttribute("value",currentQuestion.choices[i]);
+
+       choices.appendChild(answerButton);
+        
+    }
+    // var correctChoice = currentQuestion.correct;
+
+    // console.log(correctChoice)
 };
 
 // Set questions to display 
+multipleChoice();
+
+function questionClick(event){
+    console.log(event.target.value);
+
+    qIndex++;
+
+    console.log(qIndex);
+
+    multipleChoice();
+    
+};
+
+choices.addEventListener("click",questionClick);
 
 function runQuestions() {
-
-    scoreLog = 0
-    scoreLog.textContent = "Your Score : " + scoreLog;
-
 
     // Question 1
 
     askQuestions.textContent = "Please answer the following question: " + currentQuestion.question;
-    choiceA.textContent = currentQuestion.choiceA;
-    choiceB.textContent = currentQuestion.choiceB;
-    choiceC.textContent = currentQuestion.choiceC;
+   
 
     if(!currentQuestion.correct) {
         alert("Incorrect!");
