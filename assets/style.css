@@ -1,24 +1,50 @@
 * {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
 }
 
 .title {
     text-align: center;
 }
 
-.timer {
-    text-align: center;
+.timer, .score {
+    text-align: right;
+    font-size: 17px;
 }
 
 button {
-    align-items: center;
-    text-align: center;
     font-weight: bold;
     border-radius: 10px;
-    background-color: rgb(241, 85, 85);
+    background-color: rgb(128, 18, 143);
+    margin: 7px;
+    display: block;
+    width: 35%;
 }
 
 button:hover {
-    background-color: rgb(71, 175, 71);
-    
+    background-color: rgb(193, 58, 211);
+    cursor: pointer;
+}
+
+.start, 
+.choices {
+    left: 275px;
+}
+
+.start {
+    margin-bottom: 25px;
+}
+
+.askQuestions {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.initials {
+    margin-left: 13px;
+}
+
+.saveBtn {
+    width: 175px;
 }
