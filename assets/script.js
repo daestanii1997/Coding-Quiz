@@ -1,6 +1,6 @@
 var timerDisplay = document.querySelector(".timer");
 
-var timeLeft = 3;
+var timeLeft = 40;
 
 var startButton = document.querySelector(".start");
 
@@ -11,12 +11,6 @@ var askQuestions = document.querySelector(".askQuestions");
 var choices = document.querySelector(".choices");
 
 var eachChoice = document.querySelector("#eachChoice");
-
-var choiceA = document.querySelector("#A");
-
-var choiceB = document.querySelector("#B");
-
-var choiceC = document.querySelector("#C");
 
 var scoreLogEl = document.querySelector("#scoreLog");
 
@@ -56,7 +50,6 @@ var quizQuestions = [
 // ScoreLog 
 
 var scoreLog = timeLeft;
-// scoreLogEl.textContent = "Your Score : " + scoreLog;
 
 // Timer Function
 function countDown(event) {
@@ -65,20 +58,20 @@ function countDown(event) {
         timeLeft--;
         timerDisplay.textContent = timeLeft + " seconds left";
 
-        if(timeLeft === 0) {
+        if(timeLeft === 0 || qIndex === 3) {
             clearInterval(timerInterval);
 
             timerDisplay.textContent = "Time's up!";
 
             // Initial container
 
-            scoreLogEl.textContent = "Your Score : " + scoreLog;
+            scoreLogEl.textContent = "Your Score : " + timeLeft;
 
             questionContainer.replaceWith(finalScore);
 
             var initialInput = document.createElement("input");
 
-            initialInput.setAttribute("class","initials");
+            initialInput.setAttribute("id","initials");
 
             initialInput.placeholder = "Please enter your initials."
 
@@ -94,6 +87,8 @@ function countDown(event) {
 
             document.getElementById("finalScore").appendChild(saveBtn);
 
+            saveBtn.addEventListener("click", saveScore());
+
 
             // figure out how to save results and add to score with correct answers
         }
@@ -108,6 +103,8 @@ function multipleChoice() {
     var currentQuestion = quizQuestions[qIndex];
 
     askQuestions.textContent = quizQuestions[qIndex].question;
+
+    // console.log(quizQuestions[qIndex].question)
 
     choices.innerHTML = "";
 
@@ -132,22 +129,21 @@ function multipleChoice() {
 multipleChoice();
 
 function questionClick(event){
-    console.log(event.target.value);
-
+    // console.log(event.target.value);
     qIndex++;
 
-    console.log(qIndex);
+    // console.log(qIndex);
 
     multipleChoice();
 
-    // if(quizQuestions[qIndex].correct === this.event){
+    if(quizQuestions[qIndex-1].correct !== event.target.value){
 
-    //     console.log(quizQuestions[qIndex].correct);
+        // console.log("Correct answer: ",quizQuestions[qIndex].correct);
 
-    //     console.log(this.event)
+        // console.log("click event target value: ",event.target.value)
 
-    //     scoreLog = scorelog - 10;
-    // }
+        timeLeft = timeLeft - 10
+    }
     
 };
 
@@ -157,22 +153,29 @@ choices.addEventListener("click",questionClick);
 
 startButton.addEventListener("click", countDown);
 
- // Save button Click Event
+//   Save button 
 
-    // playerInitials = document.getElementsByTagName("initials").value;
+        // This is not calling the value of the input box
+
+    // playerInitials = document.getElementById("initials");
 
     // console.log(playerInitials)
 
-    //     localStorage.setItem("scoreLog",JSON.stringify(scoreLog));
+    //     localStorage.setItem("timeLeft",JSON.stringify(timeLeft));
 
     //     localStorage.setItem("playerInitials",JSON.stringify(playerInitials));
 
     // function saveScore() {
-    //     var loggedScore = JSON.parse(localStorage.getItem("scoreLog"));
+
+    //     var loggedScore = JSON.parse(localStorage.getItem("timeLeft"));
 
     //     var savedInitials = JSON.parse(localStorage.getItem("playerInitials"))
 
-    //     document.getElementById("savedScore").textContent = loggedScore;
+    //     // Below displays correct score but only scorelog is being saved to local storage
+
+    //     // Local storage is showing timeLeft & scoreLog but it is showing the initial value of 40 rather than current value
+        
+    //     document.getElementById("savedScore").textContent = "Saved Score: " + timeLeft;
 
     //     document.getElementById("savedInitials").textContent = savedInitials;
 
