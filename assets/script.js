@@ -74,7 +74,6 @@ function countDown(event) {
         document.getElementById("finalScore").appendChild(initialInput);
   
         // Save Button
-        console.log(initialInput);
   
         var saveBtn = document.createElement("button");
   
@@ -96,17 +95,13 @@ function countDown(event) {
                   score: score
               }
               
-              console.log(scoreLog);
-              
               localStorage.setItem("scoreLog", JSON.stringify(scoreLog));
               
               var scoreLog = JSON.parse(localStorage.getItem("scoreLog"));
               
-              console.log(scoreLog);
-              
               var scoreLogEl = document.createElement("p");
               
-              scoreLogEl.textContent = "Initials: " + scoreLog.initials + " Score: " + scoreLog.score;
+              scoreLogEl.textContent = "Initials: " + scoreLog.initials + "   Score: " + scoreLog.score;
               
               document.getElementById("savedScore").appendChild(scoreLogEl);
           });
