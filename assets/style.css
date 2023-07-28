@@ -26,7 +26,7 @@ button:hover {
 
 .start {
     margin-bottom: 25px;
-    width: 150 px;
+    width: 150px;
 }
 
 .askQuestions {
@@ -40,4 +40,5 @@ button:hover {
 
 .saveBtn {
     width: 175px;
+    margin-left: -5px;
 }

@@ -47,10 +47,6 @@ var quizQuestions = [
     
 ]
 
-// ScoreLog 
-
-var scoreLog = timeLeft;
-
 // Timer Function
 function countDown(event) {
     event.preventDefault();
@@ -58,7 +54,7 @@ function countDown(event) {
         timeLeft--;
         timerDisplay.textContent = timeLeft + " seconds left";
 
-        if(timeLeft === 0 || qIndex === 3) {
+        if(timeLeft === 0 || qIndex >= 3) {
             clearInterval(timerInterval);
 
             timerDisplay.textContent = "Time's up!";
@@ -89,8 +85,39 @@ function countDown(event) {
 
             saveBtn.addEventListener("click", saveScore());
 
+            //   Save button 
 
-            // figure out how to save results and add to score with correct answers
+        // This is not calling the value of the input box
+
+    playerInitials = document.getElementById("initials").value;
+
+    console.log(playerInitials)
+
+        localStorage.setItem("timeLeft",JSON.stringify(timeLeft));
+
+        localStorage.setItem("playerInitials",JSON.stringify(playerInitials));
+
+    function saveScore() {
+
+        var savedScore = JSON.parse(localStorage.getItem("timeLeft"));
+
+        var savedInitials = JSON.parse(localStorage.getItem("playerInitials"))
+
+        // Local storage is showing timeLeft but no initials value
+        
+        document.getElementById("savedScore").textContent = "Saved Score: " + timeLeft;
+
+        document.getElementById("savedInitials").textContent = savedInitials;
+
+        console.log(timeLeft);
+
+        console.log(savedInitials);
+    };
+
+    saveScore();
+
+    saveBtn.addEventListener("click", saveScore());
+
         }
 
     }, 1000);
@@ -103,8 +130,6 @@ function multipleChoice() {
     var currentQuestion = quizQuestions[qIndex];
 
     askQuestions.textContent = quizQuestions[qIndex].question;
-
-    // console.log(quizQuestions[qIndex].question)
 
     choices.innerHTML = "";
 
@@ -128,19 +153,15 @@ function multipleChoice() {
 
 multipleChoice();
 
-function questionClick(event){
-    // console.log(event.target.value);
-    qIndex++;
+// function for answer click
 
-    // console.log(qIndex);
+function questionClick(event){
+
+    qIndex++;
 
     multipleChoice();
 
     if(quizQuestions[qIndex-1].correct !== event.target.value){
-
-        // console.log("Correct answer: ",quizQuestions[qIndex].correct);
-
-        // console.log("click event target value: ",event.target.value)
 
         timeLeft = timeLeft - 10
     }
@@ -152,36 +173,3 @@ choices.addEventListener("click",questionClick);
 // Start button event
 
 startButton.addEventListener("click", countDown);
-
-//   Save button 
-
-        // This is not calling the value of the input box
-
-    // playerInitials = document.getElementById("initials");
-
-    // console.log(playerInitials)
-
-    //     localStorage.setItem("timeLeft",JSON.stringify(timeLeft));
-
-    //     localStorage.setItem("playerInitials",JSON.stringify(playerInitials));
-
-    // function saveScore() {
-
-    //     var loggedScore = JSON.parse(localStorage.getItem("timeLeft"));
-
-    //     var savedInitials = JSON.parse(localStorage.getItem("playerInitials"))
-
-    //     // Below displays correct score but only scorelog is being saved to local storage
-
-    //     // Local storage is showing timeLeft & scoreLog but it is showing the initial value of 40 rather than current value
-        
-    //     document.getElementById("savedScore").textContent = "Saved Score: " + timeLeft;
-
-    //     document.getElementById("savedInitials").textContent = savedInitials;
-
-    //     console.log(loggedScore);
-
-    //     console.log(savedInitials);
-    // };
-
-    // saveBtn.addEventListener("click", saveScore());
