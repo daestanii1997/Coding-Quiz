@@ -50,78 +50,70 @@ var quizQuestions = [
 // Timer Function
 function countDown(event) {
     event.preventDefault();
-    var timerInterval = setInterval(function() {
-        timeLeft--;
-        timerDisplay.textContent = timeLeft + " seconds left";
+    var timerInterval = setInterval(function () {
+      timeLeft--;
+      timerDisplay.textContent = timeLeft + " seconds left";
+  
+      if (timeLeft === 0 || qIndex >= 3) {
+        clearInterval(timerInterval);
+  
+        timerDisplay.textContent = "Time's up!";
+  
+        // Initial container
+  
+        scoreLogEl.textContent = "Your Score : " + timeLeft;
+  
+        questionContainer.replaceWith(finalScore);
+  
+        var initialInput = document.createElement("input");
+  
+        initialInput.setAttribute("id", "initials");
+  
+        initialInput.placeholder = "Please enter your initials.";
+  
+        document.getElementById("finalScore").appendChild(initialInput);
+  
+        // Save Button
+        console.log(initialInput);
+  
+        var saveBtn = document.createElement("button");
+  
+        saveBtn.textContent = "Save Results";
+  
+        saveBtn.setAttribute("class", "saveBtn");
+  
+        document.getElementById("finalScore").appendChild(saveBtn);
+  
+       saveBtn.addEventListener("click", function(event) {
+           event.preventDefault();
 
-        if(timeLeft === 0 || qIndex >= 3) {
-            clearInterval(timerInterval);
+              var initials = document.getElementById("initials").value;
 
-            timerDisplay.textContent = "Time's up!";
-
-            // Initial container
-
-            scoreLogEl.textContent = "Your Score : " + timeLeft;
-
-            questionContainer.replaceWith(finalScore);
-
-            var initialInput = document.createElement("input");
-
-            initialInput.setAttribute("id","initials");
-
-            initialInput.placeholder = "Please enter your initials."
-
-            document.getElementById("finalScore").appendChild(initialInput);
-
-            // Save Button
-
-            var saveBtn = document.createElement("button");
-
-            saveBtn.textContent = "Save Results";
-
-            saveBtn.setAttribute("class","saveBtn");
-
-            document.getElementById("finalScore").appendChild(saveBtn);
-
-            saveBtn.addEventListener("click", saveScore());
-
-            //   Save button 
-
-        // This is not calling the value of the input box
-
-    playerInitials = document.getElementById("initials").value;
-
-    console.log(playerInitials)
-
-        localStorage.setItem("timeLeft",JSON.stringify(timeLeft));
-
-        localStorage.setItem("playerInitials",JSON.stringify(playerInitials));
-
-    function saveScore() {
-
-        var savedScore = JSON.parse(localStorage.getItem("timeLeft"));
-
-        var savedInitials = JSON.parse(localStorage.getItem("playerInitials"))
-
-        // Local storage is showing timeLeft but no initials value
+              var score = timeLeft;
+              
+              var scoreLog = {
+                  initials: initials,
+                  score: score
+              }
+              
+              console.log(scoreLog);
+              
+              localStorage.setItem("scoreLog", JSON.stringify(scoreLog));
+              
+              var scoreLog = JSON.parse(localStorage.getItem("scoreLog"));
+              
+              console.log(scoreLog);
+              
+              var scoreLogEl = document.createElement("p");
+              
+              scoreLogEl.textContent = "Initials: " + scoreLog.initials + " Score: " + scoreLog.score;
+              
+              document.getElementById("savedScore").appendChild(scoreLogEl);
+          });
         
-        document.getElementById("savedScore").textContent = "Saved Score: " + timeLeft;
-
-        document.getElementById("savedInitials").textContent = savedInitials;
-
-        console.log(timeLeft);
-
-        console.log(savedInitials);
-    };
-
-    saveScore();
-
-    saveBtn.addEventListener("click", saveScore());
-
-        }
-
+      }
     }, 1000);
-}
+  }
 
 // Function to display questions and choice buttons
 
